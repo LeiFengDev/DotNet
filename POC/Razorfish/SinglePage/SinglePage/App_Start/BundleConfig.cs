@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace SinglePage
 {
@@ -23,9 +22,17 @@ namespace SinglePage
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-select").Include(
+                      "~/Scripts/bootstrap-select.*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/main").Include(
+                      "~/Scripts/main.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-select.css",
                       "~/Content/site.css"));
+
         }
     }
 }

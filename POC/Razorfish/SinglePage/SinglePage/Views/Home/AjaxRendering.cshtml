@@ -1,0 +1,32 @@
+﻿@model SinglePage.Components.Models.RegisteredComponentInfo
+
+@if (Model == null)
+{
+    return;
+}
+
+<div id="component-@ViewBag.Index" class="@ViewBag.CssClass">
+
+</div>
+<script>
+
+    var index = parseInt('@ViewBag.Index');
+    var actionUrl = '@Url.Action(Model.ActionName, Model.ControllerName, new { Area = Model.AreaName })';
+    //console.log("componentAction:" + actionUrl);
+    $.ajax({
+        type: "GET",
+        url: actionUrl,
+        data: { index: index },
+        contentType: "application/json; charset=utf-8",
+        //cache: false,
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert("Ajax call failed: " + xhr.status + "(" + thrownError + ")");
+        },
+        success: function (result) {
+            $("#rendererContainer > #component-@ViewBag.Index").html(result).promise().done(function (){
+                $(this).next("script").remove();
+            });
+        }
+    });
+
+</script>
