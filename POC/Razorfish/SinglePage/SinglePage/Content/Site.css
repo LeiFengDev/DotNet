@@ -27,3 +27,20 @@ textarea {
 #rendererContainer .panel > .panel-body {
     min-height: 120px;
 }
+
+
+#rendererContainer .cta {
+    border-style: solid;
+    border-width: 2px;
+    border-color: dimgrey;
+    border-radius: 5px;
+}
+
+#rendererContainer .cta > a > img {
+    min-height: 90px;
+    width: 100%;
+}
+
+#rendererContainer .cta > a > div.carousel-caption {
+    color: dimgray;
+}

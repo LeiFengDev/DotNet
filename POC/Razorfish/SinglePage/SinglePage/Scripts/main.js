@@ -111,6 +111,8 @@
                 switch (selectorId) {
                     case "selectNumber":
                         controlsNumberChange(selectedNumber, actionUrl, componentCssClass);
+                        if (selectedLayout == 1)
+                            controlsStyleChange(selectedNumber, componentCssClass);
                         break;
                     case "selectLayout":
                         controlsStyleChange(selectedNumber, componentCssClass);

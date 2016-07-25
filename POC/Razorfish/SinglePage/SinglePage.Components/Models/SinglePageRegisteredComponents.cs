@@ -15,7 +15,8 @@ namespace SinglePage.Components.Models
                                 ActionName = "Index",
                                 Name = "NoName",
                                 Description = "Empty Component",
-                                Index = 0
+                                Index = 0,
+                                InnerItemTypeString = "System.String"
                             },
                         new RegisteredComponentInfo
                             {
@@ -24,7 +25,8 @@ namespace SinglePage.Components.Models
                                 ActionName = "Index",
                                 Name = "CTA",
                                 Description = "Call to Action",
-                                Index = 1
+                                Index = 1,
+                                InnerItemTypeString = "SinglePage.Components.ViewModels.CallToActionViewModel.CtaInnerVm"
                             }
                     };
             }

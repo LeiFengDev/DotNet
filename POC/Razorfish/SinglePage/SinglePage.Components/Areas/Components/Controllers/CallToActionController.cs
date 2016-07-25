@@ -9,10 +9,24 @@ namespace SinglePage.Components.Controllers
 {
     public class CallToActionController : BaseComponentController
     {
-        public override ActionResult Index(int index)
+        public override ActionResult Index(int index, string json = null)
         {
+            var model = new CallToActionViewModel();
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                try
+                {
+                    model.InnerModel = Newtonsoft.Json.JsonConvert.DeserializeObject<CallToActionViewModel.CtaInnerVm>(json);
+                }
+                catch (Exception)
+                {
+                    model.InnerModel = null;
+                    //throw;
+                }
+            }
+
             ViewBag.Index = index;
-            return View(new CallToActionViewModel());
+            return View(model);
         }
     }
 }

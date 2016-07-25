@@ -5,28 +5,41 @@
     return;
 }
 
+@{
+    //var innerItemClassName = Model.InnerItemTypeString;
+    //var item = Activator.CreateInstance("SinglePage.Components", innerItemClassName).Unwrap();
+}
+@*@Html.Raw(Json.Encode(item))*@
+
 <div id="component-@ViewBag.Index" class="@ViewBag.CssClass">
 
 </div>
 <script>
+    var ctaObj = { "WrapperClass": "cta", "Target": "_blank", "TargetUrl": "https://www.google.ca", "ImageSrcUrl": "https://www.google.ca/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "ImageAlt": "google.ca", "ImageWidth": 272, "ImageHeight": 92, "TextCaption": "Google Canada", "TextContent": "This is a CTA sample" };
+
 
     var index = parseInt('@ViewBag.Index');
     var actionUrl = '@Url.Action(Model.ActionName, Model.ControllerName, new { Area = Model.AreaName })';
     //console.log("componentAction:" + actionUrl);
+
+    var jsonParam = "";
+    if ("CTA" == "@Model.Name")
+        jsonParam = JSON.stringify(ctaObj);
+    //console.log(jsonParam);
+            
     $.ajax({
         type: "GET",
         url: actionUrl,
-        data: { index: index },
+        data: { index: index, json: jsonParam },
         contentType: "application/json; charset=utf-8",
         //cache: false,
         error: function (xhr, ajaxOptions, thrownError) {
             alert("Ajax call failed: " + xhr.status + "(" + thrownError + ")");
         },
         success: function (result) {
-            $("#rendererContainer > #component-@ViewBag.Index").html(result).promise().done(function (){
+            $("#rendererContainer > #component-@ViewBag.Index").html(result).promise().done(function () {
                 $(this).next("script").remove();
             });
         }
     });
-
 </script>
