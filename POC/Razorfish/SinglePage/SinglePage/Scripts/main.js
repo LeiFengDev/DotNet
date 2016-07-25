@@ -68,7 +68,7 @@
                 //    //console.log("#" + i);
                 //    containerAjaxLoad(actionUrl, $target, i, componentCssClass);
                 //}
-                containerLoadNext(actionUrl, $target, totalCurrentComponents, componentCssClass, selectedNumber);
+                containerLoadNext(actionUrl, $target, totalCurrentComponents + 1, componentCssClass, selectedNumber);
 
                 return;
             }

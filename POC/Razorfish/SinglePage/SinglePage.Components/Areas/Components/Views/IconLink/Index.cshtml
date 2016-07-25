@@ -1,0 +1,29 @@
+﻿@model SinglePage.Components.ViewModels.IconLinkViewModel
+
+@if (Model == null)
+{
+    return;
+}
+
+@*<div id="Control-@string.Format("{0}_{1}", Model.ComponentInfo.Index, ViewBag.Index)">*@
+
+    @if (Model.InnerModel == null)
+    {
+        <div class="iconlink">
+            <a href="https://www.google.ca/maps" target="_blank">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                Sample IconLink
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="@Model.InnerModel.WrapperClass">
+            <a href="@Model.InnerModel.TargetUrl" target="@Model.InnerModel.Target">
+                <i class="@Model.InnerModel.IconCssClass" aria-hidden="true"></i>
+                @Model.InnerModel.IconText
+            </a>
+        </div>
+    }
+
+@*</div>*@

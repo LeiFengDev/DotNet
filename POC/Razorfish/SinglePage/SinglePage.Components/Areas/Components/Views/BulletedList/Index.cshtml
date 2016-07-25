@@ -1,0 +1,124 @@
+﻿@model SinglePage.Components.ViewModels.BulletedListViewModel
+
+@if (Model == null)
+{
+    return;
+}
+
+@*@{ 
+    Model.InnerModel = new SinglePage.Components.ViewModels.BulletedListViewModel.ListInnerVm() { WrapperClass = "blist", IsOrderedBullets = true, ListCssClass = "list-unstyled", ListItems = new List<SinglePage.Components.ViewModels.BulletedListViewModel.DecoratedIconLink>() };
+
+
+    Model.InnerModel.ListItems.Add(
+        new SinglePage.Components.ViewModels.BulletedListViewModel.DecoratedIconLink()
+        {
+            HasBadge = false,
+            BadgeNumber = 0,
+            ItemCssClass = null,
+            IconLinkItem =
+                new SinglePage.Components.ViewModels.IconLinkViewModel.IconLinkInnerVm
+                {
+                    WrapperClass = "IconLink",
+                    Target = "_blank",
+                    TargetUrl = "https://www.google.ca/imghp",
+                    IconCssClass = "fa fa-file-image-o",
+                    IconText = "Google Image"
+                }
+        });
+    Model.InnerModel.ListItems.Add(
+        new SinglePage.Components.ViewModels.BulletedListViewModel.DecoratedIconLink()
+        {
+            HasBadge = false,
+            BadgeNumber = 0,
+            ItemCssClass = null,
+            IconLinkItem =
+                new SinglePage.Components.ViewModels.IconLinkViewModel.IconLinkInnerVm
+                {
+                    WrapperClass = "IconLink",
+                    Target = "_blank",
+                    TargetUrl = "https://news.google.ca/nwshp",
+                    IconCssClass = "fa fa-newspaper-o",
+                    IconText = "Google News"
+                }
+        });
+    Model.InnerModel.ListItems.Add(
+        new SinglePage.Components.ViewModels.BulletedListViewModel.DecoratedIconLink()
+        {
+            HasBadge = false,
+            BadgeNumber = 0,
+            ItemCssClass = null,
+            IconLinkItem =
+                new SinglePage.Components.ViewModels.IconLinkViewModel.IconLinkInnerVm
+                {
+                    WrapperClass = "IconLink",
+                    Target = "_blank",
+                    TargetUrl = "https://translate.google.ca/",
+                    IconCssClass = "fa fa-file-text-o",
+                    IconText = "Google Translate"
+                }
+        });
+}
+@Html.Raw(Json.Encode(Model.InnerModel))*@
+
+
+    <div class="panel panel-default" id="Control-@string.Format("{0}_{1}", Model.ComponentInfo.Index, ViewBag.Index)">
+    <div class="panel-heading">@(ViewBag.Index). @Model.ComponentInfo.Description</div>
+    <div class="panel-body">
+
+        @if (Model.InnerModel == null)
+        {
+            <div class="blist">
+                <ul class="list-group">
+                    <li class="list-group-item"><span class="badge">12</span> New</li>
+                    <li class="list-group-item"><span class="badge">5</span> Deleted</li>
+                    <li class="list-group-item"><span class="badge">3</span> Warnings</li>
+                </ul>
+           </div>
+        }
+        else
+        {
+            <div class="@Model.InnerModel.WrapperClass">
+
+                @if (Model.InnerModel.IsOrderedBullets)
+                {
+                    <ol class="@Model.InnerModel.ListCssClass">
+                        @foreach (var item in Model.InnerModel.ListItems)
+                        {
+                            //var itemIconLink = new SinglePage.Components.ViewModels.IconLinkViewModel();
+                            //itemIconLink.InnerModel = item.IconLinkItem;
+                            var iconLinkItem = item.IconLinkItem;
+                            var iconLinkJson = Newtonsoft.Json.JsonConvert.SerializeObject(iconLinkItem);
+
+                            <li @(string.IsNullOrWhiteSpace(item.ItemCssClass) ? string.Empty : "class='" + item.ItemCssClass + "'")>
+
+                                @Html.Action("Index", "IconLink", new { index = 0, json = iconLinkJson })
+                            </li>
+                        }
+                    </ol>
+                }
+                else
+                {
+                    <ul class="@Model.InnerModel.ListCssClass">
+                        @foreach (var item in Model.InnerModel.ListItems)
+                        {
+                                                        //var itemIconLink = new SinglePage.Components.ViewModels.IconLinkViewModel();
+                            //itemIconLink.InnerModel = item.IconLinkItem;
+                            var iconLinkItem = item.IconLinkItem;
+                            var iconLinkJson = Newtonsoft.Json.JsonConvert.SerializeObject(iconLinkItem);
+
+                            <li @(string.IsNullOrWhiteSpace(item.ItemCssClass) ? string.Empty : "class='" + item.ItemCssClass + "'")>
+                                @if (item.HasBadge)
+                                {
+                                    <span class="badge">@item.BadgeNumber</span>
+                                }
+                                @Html.Action("Index", "IconLink", new { index = 0, json = iconLinkJson })
+                            </li>
+                        }
+                    </ul>
+                }
+
+            </div>
+        }
+
+    </div>
+</div>

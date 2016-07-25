@@ -15,8 +15,8 @@
 
 </div>
 <script>
-    var ctaObj = { "WrapperClass": "cta", "Target": "_blank", "TargetUrl": "https://www.google.ca", "ImageSrcUrl": "https://www.google.ca/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "ImageAlt": "google.ca", "ImageWidth": 272, "ImageHeight": 92, "TextCaption": "Google Canada", "TextContent": "This is a CTA sample" };
-
+    var ctaObj = { "WrapperClass": "cta", "Target": "_blank", "TargetUrl": "https://www.google.com", "ImageSrcUrl": "https://www.google.ca/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "ImageAlt": "google.com", "ImageWidth": 272, "ImageHeight": 92, "TextCaption": "Google USA", "TextContent": "This is a CTA sample" };
+    var blistObj = { "WrapperClass": "blist", "IsOrderedBullets": false, "ListCssClass": "list-disc", "ListItems": [{ "HasBadge": true, "BadgeNumber": 10, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://www.google.ca/imghp", "IconCssClass": "fa fa-file-image-o", "IconText": "Google Image" } }, { "HasBadge": true, "BadgeNumber": 5, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://news.google.ca/nwshp", "IconCssClass": "fa fa-newspaper-o", "IconText": "Google News" } }, { "HasBadge": true, "BadgeNumber": 4, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://translate.google.ca/", "IconCssClass": "fa fa-file-text-o", "IconText": "Google Translate" } }, { "HasBadge": false, "BadgeNumber": 0, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://www.google.ca/maps", "IconCssClass": "fa fa-map", "IconText": "Google Maps" } }, { "HasBadge": true, "BadgeNumber": 1, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://www.youtube.com", "IconCssClass": "fa fa-youtube-play", "IconText": "Youtube" } }, { "HasBadge": true, "BadgeNumber": 11, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://play.google.com/store", "IconCssClass": "fa fa-shopping-cart", "IconText": "Google Store" } }] };
 
     var index = parseInt('@ViewBag.Index');
     var actionUrl = '@Url.Action(Model.ActionName, Model.ControllerName, new { Area = Model.AreaName })';
@@ -26,11 +26,15 @@
     if ("CTA" == "@Model.Name")
         jsonParam = JSON.stringify(ctaObj);
     //console.log(jsonParam);
-            
+    if ("BulletedList" == "@Model.Name")
+        jsonParam = JSON.stringify(blistObj);
+    //console.log(jsonParam);
+
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: actionUrl,
-        data: { index: index, json: jsonParam },
+        //data: { index: index, json: jsonParam },
+        data: JSON.stringify({ index: index, json: jsonParam }),
         contentType: "application/json; charset=utf-8",
         //cache: false,
         error: function (xhr, ajaxOptions, thrownError) {

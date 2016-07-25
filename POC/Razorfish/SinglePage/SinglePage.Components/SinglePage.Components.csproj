@@ -125,6 +125,8 @@
   <ItemGroup>
     <Compile Include="Areas\Components\ComponentsAreaRegistration.cs" />
     <Compile Include="Areas\Components\Controllers\BaseComponentController.cs" />
+    <Compile Include="Areas\Components\Controllers\IconLinkController.cs" />
+    <Compile Include="Areas\Components\Controllers\BulletedListController.cs" />
     <Compile Include="Areas\Components\Controllers\CallToActionController.cs" />
     <Compile Include="Models\RegisteredComponentInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,6 +134,8 @@
     <Compile Include="ViewModels\CallToActionViewModel.cs" />
     <Compile Include="Models\SinglePageRegisteredComponents.cs" />
     <Compile Include="ViewModels\EmptyComponentViewModel.cs" />
+    <Compile Include="ViewModels\BulletedListViewModel.cs" />
+    <Compile Include="ViewModels\IconLinkViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Components\Views\Web.config" />
@@ -144,7 +148,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Components\Views\BaseComponent\Index.cshtml" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="packages.config" />
+    <Content Include="Areas\Components\Views\BulletedList\Index.cshtml" />
+    <Content Include="Areas\Components\Views\IconLink\Index.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
   </ItemGroup>
   <PropertyGroup>

@@ -31,6 +31,7 @@ namespace SinglePage
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.css",
+                      "~/Content/font-awesome.css", 
                       "~/Content/site.css"));
 
         }

@@ -44,3 +44,7 @@ textarea {
 #rendererContainer .cta > a > div.carousel-caption {
     color: dimgray;
 }
+
+#rendererContainer .blist li>.badge {
+    float: right;
+}

@@ -1,6 +1,6 @@
 ﻿namespace SinglePage.Components.ViewModels
 {
-    public class CallToActionViewModel: BaseComponentViewModel
+    public class CallToActionViewModel : BaseComponentViewModel
     {
         public CtaInnerVm InnerModel;
 
