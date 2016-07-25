@@ -1,9 +1,43 @@
-﻿<div id="default" class="col-md-12">
+﻿@using System.Linq;
+@{ 
+    var avaialbleComponents = SinglePage.Components.Models.SinglePageRegisteredComponents.ComponentList.Where(c => c.Index > 0);
+    var totalNumber = 0;
+    var componentsDesc = "";
+    foreach (var component in avaialbleComponents)
+    {
+        if (component == null) { continue; }
+
+        totalNumber++;
+
+        if (!string.IsNullOrWhiteSpace(componentsDesc))
+        {
+            componentsDesc = componentsDesc + " and ";
+        }
+        componentsDesc += component.Name + " (" + component.Description + ")";
+    }
+    componentsDesc += ".";
+}
+
+<div id="default" class="col-md-12">
     <h2>Ready to show</h2>
     <p>
         Please decide how to show the controls. Direcly select the dropdowns above, you will see the changes here. Currently we only have 2 controls. If you choose to display more than 2, empty placeholders will show up following the existing controls.
     </p>
     <p>
-        The first 2 controls are: CTA (Call to Action) button and Bulleted List.
+        The @totalNumber controls are: @componentsDesc
     </p>
+    <p>
+        This solution contains 2 MVC project: <b>SinglePage</b> is used to build up the main layout and containers, along with the design and content initialization for the loading of the control. <b>SinglePage.MVC</b> then focuses on implement the controls themselves, most of the compoents changes won't affect the first project <b>SinglePage</b>. The only changes for it is after done the changes, if the inner data the component consumed changed, we need to request the main project to update the data object to feed the control with the proper format (Json).
+    </p>
+    <p>
+        For example, current CTA control will work fine, but need the following Json object to fulfill all the designed context.
+        <code>{ "WrapperClass": "cta", "Target": "_blank", "TargetUrl": "https://www.google.com", "ImageSrcUrl": "https://www.google.ca/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "ImageAlt": "google.com", "ImageWidth": 272, "ImageHeight": 92, "TextCaption": "Google USA", "TextContent": "This is a CTA sample" }</code>
+    </p>
+    <p>
+        Same as the BulletedList control, but more customizing fields:
+        <code>{ "WrapperClass": "blist", "IsOrderedBullets": false, "ListCssClass": "list-disc", "ListItems": [{ "HasBadge": true, "BadgeNumber": 10, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://www.google.ca/imghp", "IconCssClass": "fa fa-file-image-o", "IconText": "Google Image" } }, { "HasBadge": true, "BadgeNumber": 5, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://news.google.ca/nwshp", "IconCssClass": "fa fa-newspaper-o", "IconText": "Google News" } }, { "HasBadge": true, "BadgeNumber": 4, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://translate.google.ca/", "IconCssClass": "fa fa-file-text-o", "IconText": "Google Translate" } }, { "HasBadge": false, "BadgeNumber": 0, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://www.google.ca/maps", "IconCssClass": "fa fa-map", "IconText": "Google Maps" } }, { "HasBadge": true, "BadgeNumber": 1, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://www.youtube.com", "IconCssClass": "fa fa-youtube-play", "IconText": "Youtube" } }, { "HasBadge": true, "BadgeNumber": 11, "ItemCssClass": null, "IconLinkItem": { "WrapperClass": "IconLink", "Target": "_blank", "TargetUrl": "https://play.google.com/store", "IconCssClass": "fa fa-shopping-cart", "IconText": "Google Store" } }] }</code>
+    </p>
+    <p>With the json obj and Css classes, we can control all the details of the control UI, while the functionality of the controls are implemented in their own controllers and actions.</p>
+    <p>Therefore, <b>both project need to be published into same site to be full functional.</b> Missing deploying the SinglePage.MVC project will cause the Ajax call failure and error message popped up.</p>
+    <p>All the source code can be download from https://github.com/LeiFengDev/DotNet (and as the version control). </p>
 </div>
